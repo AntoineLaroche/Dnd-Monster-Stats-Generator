@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DndMonsterStatsGenerator": {
+      "commandName": "Project",
+      "commandLineArgs": "create -c 0.125"
+    }
+  }
+}
