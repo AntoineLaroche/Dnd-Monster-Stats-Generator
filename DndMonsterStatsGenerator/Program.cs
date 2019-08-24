@@ -2,9 +2,12 @@
 {
     using System.Threading.Tasks;
     using CommandLine;
+    using DndMonsterStatsGenerator.Entities.Options;
+    using DndMonsterStatsGenerator.Service;
+    using DndMonsterStatsGenerator.Factory;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-   public class Program
+    public class Program
     {
         public static async Task Main(string[] args)
         {
@@ -13,15 +16,17 @@
                 .Configure<LoggerFilterOptions>(options => options.MinLevel = LogLevel.Debug)
                 .AddTransient<MonsterStatsCreatorService>()
                 .AddSingleton<IMonsterStatsCreatorService, MonsterStatsCreatorService>()
+                .AddScoped<IMonsterStatsGeneratorStrategyFactory, MonsterStatsGeneratorStrategyFactory>()
                 .BuildServiceProvider();
 
             var logger = serviceProvider.GetService<ILogger<Program>>();
             logger.LogDebug("Starting application");
 
+
             var monsterCreator = serviceProvider.GetService<IMonsterStatsCreatorService>();
 
-            Parser.Default.ParseArguments<Create>(args)
-                   .WithParsed(async opts => await monsterCreator.CreateStats(opts));
+            Parser.Default.ParseArguments<MonsterCreationOption>(args)
+                   .WithParsed(opts => monsterCreator.CreateStats(opts));
 
             logger.LogDebug("All done!");
         }

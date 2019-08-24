@@ -1,14 +1,13 @@
 ﻿using CommandLine;
-using CommandLine.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace DndMonsterStatsGenerator
+namespace DndMonsterStatsGenerator.Entities.Options
 {
     /// <summary>
     /// test
     /// </summary>
     [Verb("create", HelpText = "Create a monster stats according to the cr")]
-    public class Create
+    public class MonsterCreationOption
     {
 
         [Option('c', "challengeRating",
