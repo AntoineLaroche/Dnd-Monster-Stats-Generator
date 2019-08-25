@@ -10,7 +10,7 @@ namespace DndMonsterStatsGenerator.Strategy
         {
             return new MonsterStats
             {
-                AC = 13 + Convert.ToInt32(Math.Floor(monsterCreationOption.CR / 2)),
+                AC = 13 + Convert.ToInt32(Math.Floor(monsterCreationOption.CR / 3)),
                 HP = Convert.ToInt32(15 * monsterCreationOption.CR) + 15,
                 Attack = 4 + Convert.ToInt32(Math.Floor(monsterCreationOption.CR / 2)),
                 Damage = Convert.ToInt32(5 * monsterCreationOption.CR) + 5,
