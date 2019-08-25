@@ -1,9 +1,10 @@
-﻿using DndMonsterStatsGenerator.Entities.Options;
+﻿using DndMonsterStatsGenerator.Entities.Business;
+using DndMonsterStatsGenerator.Entities.Options;
 
 namespace DndMonsterStatsGenerator.Service
 {
     public interface IMonsterStatsCreatorService
     {
-        void CreateStats(MonsterCreationOption creationOption);
+        int CreateStats(MonsterCreationOption creationOption);
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace DndMonsterStatsGenerator
 {
-    using System.Threading.Tasks;
     using CommandLine;
+    using Colorful;
     using DndMonsterStatsGenerator.Entities.Options;
     using DndMonsterStatsGenerator.Service;
     using DndMonsterStatsGenerator.Factory;
@@ -9,7 +9,7 @@
     using Microsoft.Extensions.Logging;
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             var serviceProvider = new ServiceCollection()
                 .AddLogging(configure => configure.AddConsole())
@@ -19,16 +19,15 @@
                 .AddScoped<IMonsterStatsGeneratorStrategyFactory, MonsterStatsGeneratorStrategyFactory>()
                 .BuildServiceProvider();
 
+            Console.WriteAscii("DND monster stats generator", System.Drawing.Color.DarkRed);
+
             var logger = serviceProvider.GetService<ILogger<Program>>();
             logger.LogDebug("Starting application");
-
 
             var monsterCreator = serviceProvider.GetService<IMonsterStatsCreatorService>();
 
             Parser.Default.ParseArguments<MonsterCreationOption>(args)
-                   .WithParsed(opts => monsterCreator.CreateStats(opts));
-
-            logger.LogDebug("All done!");
+                  .WithParsed(opts => monsterCreator.CreateStats(opts));
         }
     }
 }

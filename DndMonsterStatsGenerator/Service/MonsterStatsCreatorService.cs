@@ -1,21 +1,31 @@
 ﻿using DndMonsterStatsGenerator.Entities.Options;
 using DndMonsterStatsGenerator.Factory;
+using ConsoleTableExt;
+using DndMonsterStatsGenerator.Entities.Business;
+using System.Collections.Generic;
 
 namespace DndMonsterStatsGenerator.Service
 {
     public class MonsterStatsCreatorService : IMonsterStatsCreatorService
     {
-        private IMonsterStatsGeneratorStrategyFactory _monsterStatsGeneratorStrategyFactory;
+        private readonly IMonsterStatsGeneratorStrategyFactory _monsterStatsGeneratorStrategyFactory;
 
         public MonsterStatsCreatorService(IMonsterStatsGeneratorStrategyFactory monsterStatsGeneratorStrategyFactory)
         {
             _monsterStatsGeneratorStrategyFactory = monsterStatsGeneratorStrategyFactory;
         }
 
-        public void CreateStats(MonsterCreationOption creationOption)
+        public int CreateStats(MonsterCreationOption creationOption)
         {
-           var strategy = _monsterStatsGeneratorStrategyFactory.Get(creationOption);
-           var monster = strategy.GenerateMonsterStats(creationOption.CR);
+            var strategy = _monsterStatsGeneratorStrategyFactory.Get(creationOption);
+            var monsterStats = new List<MonsterStats>
+            {
+                strategy.GenerateMonsterStats(creationOption)
+            };
+            ConsoleTableBuilder.From(monsterStats)
+                                .WithFormat(ConsoleTableBuilderFormat.Alternative)
+                                .ExportAndWriteLine();
+            return 0;
         }
     }
 }
