@@ -23,7 +23,7 @@ namespace DndMonsterStatsGenerator.Service
                 strategy.GenerateMonsterStats(creationOption)
             };
             ConsoleTableBuilder.From(monsterStats)
-                                .WithFormat(ConsoleTableBuilderFormat.Alternative)
+                                .WithFormat(ConsoleTableBuilderFormat.MarkDown)
                                 .ExportAndWriteLine();
             return 0;
         }

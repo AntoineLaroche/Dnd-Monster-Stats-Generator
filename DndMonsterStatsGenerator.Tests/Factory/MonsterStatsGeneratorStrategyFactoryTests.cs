@@ -2,6 +2,7 @@ using AutoFixture;
 using DndMonsterStatsGenerator.Entities.Options;
 using DndMonsterStatsGenerator.Factory;
 using DndMonsterStatsGenerator.Strategy;
+using System;
 using Xunit;
 
 namespace DndMonsterStatsGenerator.Tests.Factory
@@ -94,6 +95,14 @@ namespace DndMonsterStatsGenerator.Tests.Factory
             var result = _sut.Get(monsterCreationOptions);
 
             Assert.IsType<MonsterWithCRZeroStatsGeneratorStrategy>(result);
+        }
+
+        [Fact]
+        public void GivenMonsterOptionsWithNotImplementedCR_Get_ShouldThrowException()
+        {
+            var monsterCreationOptions = _fixture.Build<MonsterCreationOption>().With(o => o.CR, 0.3333).Create();
+
+           Assert.Throws<NotImplementedException>(() => _sut.Get(monsterCreationOptions));
         }
     }
 }
