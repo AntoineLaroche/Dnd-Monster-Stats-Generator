@@ -8,32 +8,24 @@ namespace DndMonsterStatsGenerator.Factory
     {
         public IMonsterStatsGeneratorStrategy Get(MonsterCreationOption monsterCreationOptions)
         {
-            switch (monsterCreationOptions)
+            return monsterCreationOptions switch
             {
-                case MonsterCreationOption option when option.CR == 0:
-                    return new MonsterWithCRZeroStatsGeneratorStrategy();
+                MonsterCreationOption option when option.CR == 0 => new MonsterWithCRZeroStatsGeneratorStrategy(),
 
-                case MonsterCreationOption option when option.CR == 0.125:
-                    return new MonsterWithCROneEightStatsGeneratorStrategy();
+                MonsterCreationOption option when option.CR == 0.125 => new MonsterWithCROneEightStatsGeneratorStrategy(),
 
-                case MonsterCreationOption option when option.CR == 0.25:
-                    return new MonsterWithCROneQuarterStatsGeneratorStrategy();
+                MonsterCreationOption option when option.CR == 0.25 => new MonsterWithCROneQuarterStatsGeneratorStrategy(),
 
-                case MonsterCreationOption option when option.CR == 0.5:
-                    return new MonsterWithCRHalfStatsGeneratorStrategy();
+                MonsterCreationOption option when option.CR == 0.5 => new MonsterWithCRHalfStatsGeneratorStrategy(),
 
-                case MonsterCreationOption options when options.CR == 1:
-                    return new MonsterWithCROneStatsGeneratorStrategy();
+                MonsterCreationOption options when options.CR == 1 => new MonsterWithCROneStatsGeneratorStrategy(),
 
-                case MonsterCreationOption opts when opts.CR >= 2 && opts.CR < 8:
-                    return new MonsterWithCRBetweenTwoAndSevenStatsGeneratorStrategy();
+                MonsterCreationOption opts when opts.CR >= 2 && opts.CR < 8 => new MonsterWithCRBetweenTwoAndSevenStatsGeneratorStrategy(),
 
-                case MonsterCreationOption monsterCreationOption when monsterCreationOption.CR >= 8:
-                    return new MonsterWithCREightOrHigherStatsGeneratorStrategy();
+                MonsterCreationOption monsterCreationOption when monsterCreationOption.CR >= 8 => new MonsterWithCREightOrHigherStatsGeneratorStrategy(),
 
-                default:
-                    throw new NotImplementedException();
-            }
+                _ => throw new NotImplementedException(),
+            };
         }
     }
 }

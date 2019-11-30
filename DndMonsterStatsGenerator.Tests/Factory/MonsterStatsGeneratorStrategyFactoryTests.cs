@@ -1,4 +1,5 @@
 using AutoFixture;
+using FluentAssertions;
 using DndMonsterStatsGenerator.Entities.Options;
 using DndMonsterStatsGenerator.Factory;
 using DndMonsterStatsGenerator.Strategy;
@@ -28,7 +29,7 @@ namespace DndMonsterStatsGenerator.Tests.Factory
 
             var result = _sut.Get(monsterCreationOptions);
 
-            Assert.IsType<MonsterWithCREightOrHigherStatsGeneratorStrategy>(result);
+            result.Should().BeOfType<MonsterWithCREightOrHigherStatsGeneratorStrategy>();
         }
 
         [Theory]
@@ -44,7 +45,7 @@ namespace DndMonsterStatsGenerator.Tests.Factory
 
             var result = _sut.Get(monsterCreationOptions);
 
-            Assert.IsType<MonsterWithCRBetweenTwoAndSevenStatsGeneratorStrategy>(result);
+            result.Should().BeOfType<MonsterWithCRBetweenTwoAndSevenStatsGeneratorStrategy>();
         }
 
         [Fact]
@@ -54,7 +55,7 @@ namespace DndMonsterStatsGenerator.Tests.Factory
 
             var result = _sut.Get(monsterCreationOptions);
 
-            Assert.IsType<MonsterWithCROneStatsGeneratorStrategy>(result);
+            result.Should().BeOfType<MonsterWithCROneStatsGeneratorStrategy>();
         }
 
         [Fact]
@@ -64,7 +65,7 @@ namespace DndMonsterStatsGenerator.Tests.Factory
 
             var result = _sut.Get(monsterCreationOptions);
 
-            Assert.IsType<MonsterWithCRHalfStatsGeneratorStrategy>(result);
+            result.Should().BeOfType<MonsterWithCRHalfStatsGeneratorStrategy>();
         }
 
         [Fact]
@@ -74,7 +75,7 @@ namespace DndMonsterStatsGenerator.Tests.Factory
 
             var result = _sut.Get(monsterCreationOptions);
 
-            Assert.IsType<MonsterWithCROneQuarterStatsGeneratorStrategy>(result);
+            result.Should().BeOfType<MonsterWithCROneQuarterStatsGeneratorStrategy>();
         }
 
         [Fact]
@@ -84,7 +85,7 @@ namespace DndMonsterStatsGenerator.Tests.Factory
 
             var result = _sut.Get(monsterCreationOptions);
 
-            Assert.IsType<MonsterWithCROneEightStatsGeneratorStrategy>(result);
+            result.Should().BeOfType<MonsterWithCROneEightStatsGeneratorStrategy>();
         }
 
         [Fact]
@@ -94,7 +95,7 @@ namespace DndMonsterStatsGenerator.Tests.Factory
 
             var result = _sut.Get(monsterCreationOptions);
 
-            Assert.IsType<MonsterWithCRZeroStatsGeneratorStrategy>(result);
+            result.Should().BeOfType<MonsterWithCRZeroStatsGeneratorStrategy>();
         }
 
         [Fact]
@@ -102,7 +103,9 @@ namespace DndMonsterStatsGenerator.Tests.Factory
         {
             var monsterCreationOptions = _fixture.Build<MonsterCreationOption>().With(o => o.CR, 0.3333).Create();
 
-           Assert.Throws<NotImplementedException>(() => _sut.Get(monsterCreationOptions));
+            Action act = () => _sut.Get(monsterCreationOptions);
+
+            act.Should().ThrowExactly<NotImplementedException>();
         }
     }
 }

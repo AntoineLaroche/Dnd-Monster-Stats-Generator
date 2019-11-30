@@ -3,6 +3,8 @@ using DndMonsterStatsGenerator.Factory;
 using ConsoleTableExt;
 using DndMonsterStatsGenerator.Entities.Business;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace DndMonsterStatsGenerator.Service
 {
@@ -15,16 +17,25 @@ namespace DndMonsterStatsGenerator.Service
             _monsterStatsGeneratorStrategyFactory = monsterStatsGeneratorStrategyFactory;
         }
 
-        public int CreateStats(MonsterCreationOption creationOption)
+        public async Task<int> CreateStatsAsync(MonsterCreationOption creationOption)
         {
             var strategy = _monsterStatsGeneratorStrategyFactory.Get(creationOption);
             var monsterStats = new List<MonsterStats>
             {
                 strategy.GenerateMonsterStats(creationOption)
             };
+
             ConsoleTableBuilder.From(monsterStats)
                                 .WithFormat(ConsoleTableBuilderFormat.MarkDown)
                                 .ExportAndWriteLine();
+
+            if (creationOption.WriteToFile)
+            {
+                var jsonMonsterStats = JsonSerializer.Serialize(monsterStats);
+                using var file = new System.IO.StreamWriter(creationOption.Path);
+                await file.WriteLineAsync(jsonMonsterStats);
+            }
+
             return 0;
         }
     }

@@ -1,10 +1,10 @@
-﻿using DndMonsterStatsGenerator.Entities.Business;
-using DndMonsterStatsGenerator.Entities.Options;
+﻿using DndMonsterStatsGenerator.Entities.Options;
+using System.Threading.Tasks;
 
 namespace DndMonsterStatsGenerator.Service
 {
     public interface IMonsterStatsCreatorService
     {
-        int CreateStats(MonsterCreationOption creationOption);
+        Task<int> CreateStatsAsync(MonsterCreationOption creationOption);
     }
 }

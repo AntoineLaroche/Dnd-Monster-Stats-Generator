@@ -1,6 +1,6 @@
 ﻿using Xunit;
 using AutoFixture;
-using KellermanSoftware.CompareNetObjects;
+using FluentAssertions;
 using DndMonsterStatsGenerator.Strategy;
 using DndMonsterStatsGenerator.Entities.Options;
 using DndMonsterStatsGenerator.Entities.Business;
@@ -10,12 +10,11 @@ namespace DndMonsterStatsGenerator.Tests.Strategy
     public class MonsterWithCRHalfStatsGeneratorStrategyTests
     {
         private readonly Fixture _fixture;
-        private readonly CompareLogic _compareLogic;
         private readonly MonsterWithCRHalfStatsGeneratorStrategy _sut;
+
         public MonsterWithCRHalfStatsGeneratorStrategyTests()
         {
             _fixture = new Fixture();
-            _compareLogic = new CompareLogic();
             _sut = new MonsterWithCRHalfStatsGeneratorStrategy();
         }
 
@@ -23,7 +22,7 @@ namespace DndMonsterStatsGenerator.Tests.Strategy
         public void GivenMonsterOptionsWithCRHalf_GenerateMonsterStats_ShouldCreateMonsterWithGoodStats()
         {
             var monsterCreationOptions = _fixture.Build<MonsterCreationOption>().With(o => o.CR, 0.5).Create();
-            var expected = new MonsterStats
+            var expectedMonsterStats = new MonsterStats
             {
                 AC = 13,
                 HP = 24,
@@ -35,8 +34,7 @@ namespace DndMonsterStatsGenerator.Tests.Strategy
 
             var result = _sut.GenerateMonsterStats(monsterCreationOptions);
 
-            var compareResult = _compareLogic.Compare(expected, result);
-            Assert.True(compareResult.AreEqual);
+            result.Should().BeEquivalentTo(expectedMonsterStats);
         }
     }
 }

@@ -7,9 +7,11 @@
     using DndMonsterStatsGenerator.Factory;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using System.Threading.Tasks;
+
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var serviceProvider = new ServiceCollection()
                 .AddLogging(configure => configure.AddConsole())
@@ -27,7 +29,7 @@
             var monsterCreator = serviceProvider.GetService<IMonsterStatsCreatorService>();
 
             Parser.Default.ParseArguments<MonsterCreationOption>(args)
-                  .WithParsed(opts => monsterCreator.CreateStats(opts));
+                  .WithParsed(async opts => await monsterCreator.CreateStatsAsync(opts));
         }
     }
 }
