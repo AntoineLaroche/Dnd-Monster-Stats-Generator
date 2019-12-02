@@ -1,35 +1,35 @@
 ﻿using Xunit;
 using AutoFixture;
 using FluentAssertions;
-using DndMonsterStatsGenerator.Strategy;
 using DndMonsterStatsGenerator.Entities.Options;
 using DndMonsterStatsGenerator.Entities.Business;
+using DndMonsterStatsGenerator.Strategy.MonsterStatsGenerator;
 
-namespace DndMonsterStatsGenerator.Tests.Strategy
+namespace DndMonsterStatsGenerator.Tests.Strategy.MonsterStatsGenerator
 {
-    public class MonsterWithCROneEightStatsGeneratorStrategyTests
+    public class MonsterWithCRZeroStatsGeneratorStrategyTests
     {
         private readonly Fixture _fixture;
-        private readonly MonsterWithCROneEightStatsGeneratorStrategy _sut;
+        private readonly MonsterWithCRZeroStatsGeneratorStrategy _sut;
 
-        public MonsterWithCROneEightStatsGeneratorStrategyTests()
+        public MonsterWithCRZeroStatsGeneratorStrategyTests()
         {
             _fixture = new Fixture();
-            _sut = new MonsterWithCROneEightStatsGeneratorStrategy();
+            _sut = new MonsterWithCRZeroStatsGeneratorStrategy();
         }
 
         [Fact]
-        public void GivenMonsterOptionsWithCREight_GenerateMonsterStats_ShouldCreateMonsterWithGoodStats()
+        public void GivenMonsterOptionsWithCRZero_GenerateMonsterStats_ShouldCreateMonsterWithGoodStats()
         {
             var monsterCreationOptions = _fixture.Build<MonsterCreationOption>().With(o => o.CR, 0.125).Create();
             var expectedMonsterStats = new MonsterStats
             {
                 AC = 12,
-                HP = 9,
-                Attack = 3,
-                Damage = 3,
-                DC = 10,
-                Save = 2
+                HP = 3,
+                Attack = 2,
+                Damage = 1,
+                DC = 9,
+                Save = 1
             };
 
             var result = _sut.GenerateMonsterStats(monsterCreationOptions);

@@ -1,7 +1,7 @@
 ﻿using DndMonsterStatsGenerator.Entities.Options;
-using DndMonsterStatsGenerator.Strategy;
+using DndMonsterStatsGenerator.Strategy.MonsterStatsGenerator;
 
-namespace DndMonsterStatsGenerator.Factory
+namespace DndMonsterStatsGenerator.Factory.MonsterStatsGenerator
 {
     public interface IMonsterStatsGeneratorStrategyFactory
     {

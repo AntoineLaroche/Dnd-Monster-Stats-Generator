@@ -4,10 +4,10 @@
     using Colorful;
     using DndMonsterStatsGenerator.Entities.Options;
     using DndMonsterStatsGenerator.Service;
-    using DndMonsterStatsGenerator.Factory;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using System.Threading.Tasks;
+    using DndMonsterStatsGenerator.Factory.MonsterStatsGenerator;
 
     public class Program
     {

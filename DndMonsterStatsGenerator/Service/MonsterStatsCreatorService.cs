@@ -1,5 +1,4 @@
 ﻿using DndMonsterStatsGenerator.Entities.Options;
-using DndMonsterStatsGenerator.Factory;
 using ConsoleTableExt;
 using DndMonsterStatsGenerator.Entities.Business;
 using System.Collections.Generic;
@@ -9,6 +8,7 @@ using System.Threading.Tasks;
 using System;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using DndMonsterStatsGenerator.Factory.MonsterStatsGenerator;
 
 namespace DndMonsterStatsGenerator.Service
 {

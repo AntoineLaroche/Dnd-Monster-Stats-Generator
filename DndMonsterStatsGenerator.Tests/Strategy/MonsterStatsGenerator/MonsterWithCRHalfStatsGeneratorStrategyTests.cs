@@ -1,11 +1,11 @@
 ﻿using Xunit;
 using AutoFixture;
 using FluentAssertions;
-using DndMonsterStatsGenerator.Strategy;
 using DndMonsterStatsGenerator.Entities.Options;
 using DndMonsterStatsGenerator.Entities.Business;
+using DndMonsterStatsGenerator.Strategy.MonsterStatsGenerator;
 
-namespace DndMonsterStatsGenerator.Tests.Strategy
+namespace DndMonsterStatsGenerator.Tests.Strategy.MonsterStatsGenerator
 {
     public class MonsterWithCRHalfStatsGeneratorStrategyTests
     {

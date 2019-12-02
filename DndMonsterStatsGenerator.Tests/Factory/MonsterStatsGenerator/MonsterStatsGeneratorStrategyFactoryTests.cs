@@ -1,12 +1,12 @@
 using AutoFixture;
 using FluentAssertions;
 using DndMonsterStatsGenerator.Entities.Options;
-using DndMonsterStatsGenerator.Factory;
-using DndMonsterStatsGenerator.Strategy;
 using System;
 using Xunit;
+using DndMonsterStatsGenerator.Strategy.MonsterStatsGenerator;
+using DndMonsterStatsGenerator.Factory.MonsterStatsGenerator;
 
-namespace DndMonsterStatsGenerator.Tests.Factory
+namespace DndMonsterStatsGenerator.Tests.Factory.MonsterStatsGenerator
 {
     public class MonsterStatsGeneratorStrategyFactoryTests
     {

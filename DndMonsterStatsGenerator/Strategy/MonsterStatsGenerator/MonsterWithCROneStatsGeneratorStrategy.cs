@@ -1,20 +1,20 @@
 ﻿using DndMonsterStatsGenerator.Entities.Business;
 using DndMonsterStatsGenerator.Entities.Options;
 
-namespace DndMonsterStatsGenerator.Strategy
+namespace DndMonsterStatsGenerator.Strategy.MonsterStatsGenerator
 {
-    public class MonsterWithCROneQuarterStatsGeneratorStrategy : IMonsterStatsGeneratorStrategy
+    public class MonsterWithCROneStatsGeneratorStrategy : IMonsterStatsGeneratorStrategy
     {
         public MonsterStats GenerateMonsterStats(MonsterCreationOption monsterCreationOption)
         {
             return new MonsterStats
             {
                 AC = 13,
-                HP = 15,
-                Attack = 3,
-                Damage = 5,
-                DC = 10,
-                Save = 2
+                HP = 30,
+                Attack = 4,
+                Damage = 10,
+                DC = 11,
+                Save = 3
             };
         }
     }

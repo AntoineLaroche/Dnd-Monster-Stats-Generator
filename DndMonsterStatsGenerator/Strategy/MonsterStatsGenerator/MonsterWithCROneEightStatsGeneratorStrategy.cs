@@ -1,7 +1,7 @@
 ﻿using DndMonsterStatsGenerator.Entities.Business;
 using DndMonsterStatsGenerator.Entities.Options;
 
-namespace DndMonsterStatsGenerator.Strategy
+namespace DndMonsterStatsGenerator.Strategy.MonsterStatsGenerator
 {
     public class MonsterWithCROneEightStatsGeneratorStrategy : IMonsterStatsGeneratorStrategy
     {
