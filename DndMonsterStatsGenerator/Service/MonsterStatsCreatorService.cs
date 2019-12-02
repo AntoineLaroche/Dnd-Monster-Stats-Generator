@@ -3,12 +3,11 @@ using ConsoleTableExt;
 using DndMonsterStatsGenerator.Entities.Business;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System;
 using Microsoft.Extensions.Logging;
-using System.Linq;
 using DndMonsterStatsGenerator.Factory.MonsterStatsGenerator;
+using DndMonsterStatsGenerator.Factory.FileGenerator;
 
 namespace DndMonsterStatsGenerator.Service
 {
@@ -16,12 +15,13 @@ namespace DndMonsterStatsGenerator.Service
     {
         private readonly IMonsterStatsGeneratorStrategyFactory _monsterStatsGeneratorStrategyFactory;
         private readonly ILogger<IMonsterStatsCreatorService> _logger;
-        private IReadOnlyList<string> _supportedFileExtension = new List<string>{ "json", "csv", "xml" };
+        private readonly IFileGeneratorStrategyFactory _fileGeneratorStrategyFactory;
 
-        public MonsterStatsCreatorService(IMonsterStatsGeneratorStrategyFactory monsterStatsGeneratorStrategyFactory, ILogger<IMonsterStatsCreatorService> logger)
+        public MonsterStatsCreatorService(IMonsterStatsGeneratorStrategyFactory monsterStatsGeneratorStrategyFactory, ILogger<IMonsterStatsCreatorService> logger, IFileGeneratorStrategyFactory fileGeneratorStrategyFactory)
         {
             _monsterStatsGeneratorStrategyFactory = monsterStatsGeneratorStrategyFactory;
             _logger = logger;
+            _fileGeneratorStrategyFactory = fileGeneratorStrategyFactory;
         }
 
         public async Task<int> CreateStatsAsync(MonsterCreationOption creationOption)
@@ -50,13 +50,8 @@ namespace DndMonsterStatsGenerator.Service
                         throw new InvalidOperationException("Invalid character in the file name");
                     }
 
-                    if (_supportedFileExtension.Any(x => x == Path.GetExtension(creationOption.Path).ToLower()))
-                    {
-                        throw new NotSupportedException("File extension for the file was not supported");
-                    }
-
-                    var jsonMonsterStats = JsonSerializer.Serialize(monsterStats);
-                    await File.WriteAllTextAsync(creationOption.Path, jsonMonsterStats);
+                    var fileGenerator = _fileGeneratorStrategyFactory.Get(Path.GetExtension(creationOption.Path));
+                    await fileGenerator.CreateFileAsync(monsterStats, creationOption.Path);
                 }
             }
             catch(Exception ex)
