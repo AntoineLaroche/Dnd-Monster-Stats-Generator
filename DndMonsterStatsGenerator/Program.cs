@@ -28,8 +28,8 @@
 
             var monsterCreator = serviceProvider.GetService<IMonsterStatsCreatorService>();
 
-            Parser.Default.ParseArguments<MonsterCreationOption>(args)
-                  .WithParsed(async opts => await monsterCreator.CreateStatsAsync(opts));
+            await Task.Run(() => Parser.Default.ParseArguments<MonsterCreationOption>(args)
+                .WithParsed(async opts => await monsterCreator.CreateStatsAsync(opts)));
         }
     }
 }

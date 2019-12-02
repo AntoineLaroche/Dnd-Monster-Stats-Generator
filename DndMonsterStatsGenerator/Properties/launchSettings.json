@@ -2,7 +2,7 @@
   "profiles": {
     "DndMonsterStatsGenerator": {
       "commandName": "Project",
-      "commandLineArgs": "create -c 60 -w"
+      "commandLineArgs": "-c 60 -w -p \"C:\\Users\\Antoine\\source\\repos\\DndMonsterStatsGenerator\\DndMonsterStatsGenerator\\bin\\Debug\\netcoreapp3.0\\test.json\""
     }
   }
 }
