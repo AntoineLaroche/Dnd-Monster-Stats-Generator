@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using DndMonsterStatsGenerator.Factory.MonsterStatsGenerator;
 using DndMonsterStatsGenerator.Factory.FileGenerator;
+using System.IO.Abstractions;
 
 namespace DndMonsterStatsGenerator
 {
@@ -22,6 +23,7 @@ namespace DndMonsterStatsGenerator
                 .AddScoped<IMonsterStatsGeneratorStrategyFactory, MonsterStatsGeneratorStrategyFactory>()
                 .AddScoped<IFileGeneratorStrategyFactory, FileGeneratorStrategyFactory>()
                 .AddScoped<IFileCreatorService, FileCreatorService>()
+                .AddScoped<IFileSystem, FileSystem>()
                 .BuildServiceProvider();
 
             Console.WriteAscii("DND monster stats generator", System.Drawing.Color.DarkRed);

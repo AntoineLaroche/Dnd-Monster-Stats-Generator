@@ -2,7 +2,7 @@
   "profiles": {
     "DndMonsterStatsGenerator": {
       "commandName": "Project",
-      "commandLineArgs": "-c 60 -w -p \"D:\\Data\\Trucs\\repo\\Dnd-Monster-Stats-Generator\\DndMonsterStatsGenerator\\bin\\Debug\\netcoreapp3.1\\test.yml\""
+      "commandLineArgs": "-c 60 -w -p \"D:\\Data\\Trucs\\repo\\Dnd-Monster-Stats-Generator\\DndMonsterStatsGenerator\\bin\\Debug\\netcoreapp3.1\\test.xml"
     }
   }
 }
