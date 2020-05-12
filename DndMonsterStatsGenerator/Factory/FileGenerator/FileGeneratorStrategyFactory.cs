@@ -11,6 +11,8 @@ namespace DndMonsterStatsGenerator.Factory.FileGenerator
             {
                 ".json" => new JsonStrategy(),
                 ".csv" => new CsvStrategy(),
+                ".xml" => new XmlStrategy(),
+                string s when s == ".yaml" || s == ".yml" => new YamlStrategy(),
                 _ => throw new NotImplementedException(),
             };
         }

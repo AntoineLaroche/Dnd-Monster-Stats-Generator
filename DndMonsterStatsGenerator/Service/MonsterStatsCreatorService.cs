@@ -2,12 +2,10 @@
 using ConsoleTableExt;
 using DndMonsterStatsGenerator.Entities.Business;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using System;
 using Microsoft.Extensions.Logging;
 using DndMonsterStatsGenerator.Factory.MonsterStatsGenerator;
-using DndMonsterStatsGenerator.Factory.FileGenerator;
 
 namespace DndMonsterStatsGenerator.Service
 {
@@ -15,13 +13,13 @@ namespace DndMonsterStatsGenerator.Service
     {
         private readonly IMonsterStatsGeneratorStrategyFactory _monsterStatsGeneratorStrategyFactory;
         private readonly ILogger<IMonsterStatsCreatorService> _logger;
-        private readonly IFileGeneratorStrategyFactory _fileGeneratorStrategyFactory;
+        private readonly IFileCreatorService _fileCreatorService;
 
-        public MonsterStatsCreatorService(IMonsterStatsGeneratorStrategyFactory monsterStatsGeneratorStrategyFactory, ILogger<IMonsterStatsCreatorService> logger, IFileGeneratorStrategyFactory fileGeneratorStrategyFactory)
+        public MonsterStatsCreatorService(IMonsterStatsGeneratorStrategyFactory monsterStatsGeneratorStrategyFactory, ILogger<IMonsterStatsCreatorService> logger, IFileCreatorService fileCreatorService)
         {
             _monsterStatsGeneratorStrategyFactory = monsterStatsGeneratorStrategyFactory;
             _logger = logger;
-            _fileGeneratorStrategyFactory = fileGeneratorStrategyFactory;
+            _fileCreatorService = fileCreatorService;
         }
 
         public async Task<int> CreateStatsAsync(MonsterCreationOption creationOption)
@@ -40,18 +38,7 @@ namespace DndMonsterStatsGenerator.Service
 
                 if (creationOption.WriteToFile)
                 {
-                    if (string.IsNullOrWhiteSpace(creationOption.Path))
-                    {
-                        throw new ArgumentNullException($"If the write to file option is enabled a path must be furnished");
-                    }
-
-                    if (creationOption.Path.IndexOfAny(Path.GetInvalidFileNameChars()) < 0)
-                    {
-                        throw new InvalidOperationException("Invalid character in the file name");
-                    }
-
-                    var fileGenerator = _fileGeneratorStrategyFactory.Get(Path.GetExtension(creationOption.Path));
-                    await fileGenerator.CreateFileAsync(monsterStats, creationOption.Path);
+                    await _fileCreatorService.CreateFile(creationOption.Path, monsterStats);
                 }
             }
             catch(Exception ex)

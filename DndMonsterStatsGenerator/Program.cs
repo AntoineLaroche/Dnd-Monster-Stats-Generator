@@ -1,15 +1,15 @@
-﻿namespace DndMonsterStatsGenerator
-{
-    using CommandLine;
-    using Colorful;
-    using DndMonsterStatsGenerator.Entities.Options;
-    using DndMonsterStatsGenerator.Service;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
-    using System.Threading.Tasks;
-    using DndMonsterStatsGenerator.Factory.MonsterStatsGenerator;
-    using DndMonsterStatsGenerator.Factory.FileGenerator;
+﻿using CommandLine;
+using Colorful;
+using DndMonsterStatsGenerator.Entities.Options;
+using DndMonsterStatsGenerator.Service;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
+using DndMonsterStatsGenerator.Factory.MonsterStatsGenerator;
+using DndMonsterStatsGenerator.Factory.FileGenerator;
 
+namespace DndMonsterStatsGenerator
+{
     public class Program
     {
         public static async Task Main(string[] args)
@@ -21,6 +21,7 @@
                 .AddSingleton<IMonsterStatsCreatorService, MonsterStatsCreatorService>()
                 .AddScoped<IMonsterStatsGeneratorStrategyFactory, MonsterStatsGeneratorStrategyFactory>()
                 .AddScoped<IFileGeneratorStrategyFactory, FileGeneratorStrategyFactory>()
+                .AddScoped<IFileCreatorService, FileCreatorService>()
                 .BuildServiceProvider();
 
             Console.WriteAscii("DND monster stats generator", System.Drawing.Color.DarkRed);

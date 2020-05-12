@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 using DndMonsterStatsGenerator.Entities.Business;
 using CsvHelper;
@@ -12,8 +12,8 @@ namespace DndMonsterStatsGenerator.Strategy.FileGenerator
         public async Task CreateFileAsync(List<MonsterStats> content, string path)
         {
             using var writer = new StreamWriter(path);
-            using var csv = new CsvWriter(writer);
-            await Task.Run(() => csv.WriteRecords(content));
+            using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
+            await csv.WriteRecordsAsync(content);
         }
     }
 }
