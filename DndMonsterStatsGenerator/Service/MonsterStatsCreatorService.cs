@@ -1,4 +1,5 @@
-﻿using DndMonsterStatsGenerator.Entities.Options;
+﻿#nullable enable
+using DndMonsterStatsGenerator.Entities.Options;
 using ConsoleTableExt;
 using DndMonsterStatsGenerator.Entities.Business;
 using System.Collections.Generic;
@@ -48,6 +49,11 @@ namespace DndMonsterStatsGenerator.Service
             }
 
             return 0;
+        }
+
+        public Func<MonsterCreationOption, Task> CreateStatsAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

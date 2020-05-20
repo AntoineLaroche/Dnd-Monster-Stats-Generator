@@ -1,4 +1,5 @@
-﻿namespace DndMonsterStatsGenerator.Entities.Business
+﻿#nullable enable
+namespace DndMonsterStatsGenerator.Entities.Business
 {
     /// <summary>
     /// This class represent all the stats for a monster

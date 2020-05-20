@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿#nullable enable
+using Xunit;
 using AutoFixture;
 using FluentAssertions;
 using DndMonsterStatsGenerator.Entities.Options;

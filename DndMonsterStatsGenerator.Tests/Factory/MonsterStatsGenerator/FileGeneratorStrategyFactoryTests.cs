@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿#nullable enable
+using FluentAssertions;
 using System;
 using Xunit;
 using DndMonsterStatsGenerator.Strategy.FileGenerator;

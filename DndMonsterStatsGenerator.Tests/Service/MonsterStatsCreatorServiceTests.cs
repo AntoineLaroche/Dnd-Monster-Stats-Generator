@@ -1,4 +1,5 @@
-﻿using DndMonsterStatsGenerator.Service;
+﻿#nullable enable
+using DndMonsterStatsGenerator.Service;
 using System;
 using System.Collections.Generic;
 using Moq;
@@ -33,7 +34,7 @@ namespace DndMonsterStatsGenerator.Tests.Service
         public async Task GivenErrorInMonsterStatsGeneratorStrategyFactory_CreateStatsAsync_ShouldReturnErrorAndLog(MonsterCreationOption creationOption)
         {
             _monsterStatsGeneratorStrategyFactory.Setup(m => m.Get(It.Is<MonsterCreationOption>(o => o == creationOption))).Throws(new NotImplementedException());
-            Func<object, Type, bool> state = (v, t) => v.ToString().CompareTo("Something went wrong...") == 0;
+            Func<object, Type, bool> state = (v, t) => v?.ToString().CompareTo("Something went wrong...") == 0;
 
             var actual = await _sut.CreateStatsAsync(creationOption);
 

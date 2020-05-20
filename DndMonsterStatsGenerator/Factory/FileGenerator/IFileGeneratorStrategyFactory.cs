@@ -1,4 +1,5 @@
-﻿using DndMonsterStatsGenerator.Strategy.FileGenerator;
+﻿#nullable enable
+using DndMonsterStatsGenerator.Strategy.FileGenerator;
 
 namespace DndMonsterStatsGenerator.Factory.FileGenerator
 {

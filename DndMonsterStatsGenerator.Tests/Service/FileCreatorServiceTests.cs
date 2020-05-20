@@ -1,4 +1,5 @@
-﻿using DndMonsterStatsGenerator.Service;
+﻿#nullable enable
+using DndMonsterStatsGenerator.Service;
 using System;
 using System.Collections.Generic;
 using Moq;

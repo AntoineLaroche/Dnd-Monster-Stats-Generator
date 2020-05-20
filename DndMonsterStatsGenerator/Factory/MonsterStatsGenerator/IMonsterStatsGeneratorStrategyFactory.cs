@@ -1,4 +1,5 @@
-﻿using DndMonsterStatsGenerator.Entities.Options;
+﻿#nullable enable
+using DndMonsterStatsGenerator.Entities.Options;
 using DndMonsterStatsGenerator.Strategy.MonsterStatsGenerator;
 
 namespace DndMonsterStatsGenerator.Factory.MonsterStatsGenerator

@@ -1,3 +1,4 @@
+#nullable enable
 using AutoFixture;
 using FluentAssertions;
 using DndMonsterStatsGenerator.Entities.Options;

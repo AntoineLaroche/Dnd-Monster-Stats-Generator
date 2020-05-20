@@ -1,4 +1,6 @@
-﻿using DndMonsterStatsGenerator.Entities.Options;
+﻿#nullable enable
+using DndMonsterStatsGenerator.Entities.Options;
+using System;
 using System.Threading.Tasks;
 
 namespace DndMonsterStatsGenerator.Service

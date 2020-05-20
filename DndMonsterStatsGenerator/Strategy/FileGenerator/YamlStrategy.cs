@@ -1,4 +1,5 @@
-﻿using DndMonsterStatsGenerator.Entities.Business;
+﻿#nullable enable
+using DndMonsterStatsGenerator.Entities.Business;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;

@@ -1,4 +1,5 @@
-﻿using CommandLine;
+﻿#nullable enable
+using CommandLine;
 using Colorful;
 using DndMonsterStatsGenerator.Entities.Options;
 using DndMonsterStatsGenerator.Service;
@@ -13,7 +14,7 @@ namespace DndMonsterStatsGenerator
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static async Task<int> Main(string[] args)
         {
             var serviceProvider = new ServiceCollection()
                 .AddLogging(configure => configure.AddConsole())
@@ -33,8 +34,9 @@ namespace DndMonsterStatsGenerator
 
             var monsterCreator = serviceProvider.GetService<IMonsterStatsCreatorService>();
 
-            await Task.Run(() => Parser.Default.ParseArguments<MonsterCreationOption>(args)
-                .WithParsed(async opts => await monsterCreator.CreateStatsAsync(opts)));
+            return await Parser.Default.ParseArguments<MonsterCreationOption>(args).MapResult(
+                (MonsterCreationOption opts) => monsterCreator.CreateStatsAsync(opts),
+                errs => Task.FromResult(1));
         }
     }
 }
