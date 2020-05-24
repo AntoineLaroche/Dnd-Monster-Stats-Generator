@@ -8,12 +8,12 @@ namespace DndMonsterStatsGenerator.Factory.FileGenerator
     {
         public IFileGeneratorStrategy Get(string fileExtension)
         {
-            return fileExtension.ToLower() switch
+            return fileExtension.ToLowerInvariant() switch
             {
                 ".json" => new JsonStrategy(),
                 ".csv" => new CsvStrategy(),
                 ".xml" => new XmlStrategy(),
-                string s when s == ".yaml" || s == ".yml" => new YamlStrategy(),
+                string extension when extension == ".yaml" || extension == ".yml" => new YamlStrategy(),
                 _ => throw new NotImplementedException(),
             };
         }
