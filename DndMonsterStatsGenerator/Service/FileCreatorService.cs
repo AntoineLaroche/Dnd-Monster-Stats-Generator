@@ -4,6 +4,7 @@ using DndMonsterStatsGenerator.Factory.FileGenerator;
 using System;
 using System.Collections.Generic;
 using System.IO.Abstractions;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DndMonsterStatsGenerator.Service
@@ -24,6 +25,11 @@ namespace DndMonsterStatsGenerator.Service
             if (string.IsNullOrWhiteSpace(path))
             {
                 throw new ArgumentNullException("If the write to file option is enabled a path must be furnished");
+            }
+
+            if (monsterStats == null || !monsterStats.Any())
+            {
+                throw new InvalidOperationException("There's no monster stats to write to a file");
             }
 
             if (!_fileSystem.Directory.Exists(_fileSystem.Path.GetDirectoryName(path)))

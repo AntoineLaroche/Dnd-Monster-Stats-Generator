@@ -55,6 +55,29 @@ namespace DndMonsterStatsGenerator.Tests.Service
         }
 
         [Theory, AutoData]
+        public async Task GivenNullMonsterStatsList_CreateFile_ShouldThrowInvalidOperationException(string path)
+        {
+
+            Func<Task> action = async () => { await _sut.CreateFile(path, null); };
+
+            await action.Should()
+                .ThrowExactlyAsync<InvalidOperationException>()
+                .WithMessage("There's no monster stats to write to a file");
+        }
+
+        [Theory, AutoData]
+        public async Task GivenEmptyMonsterStatsList_CreateFile_ShouldThrowInvalidOperationException(string path)
+        {
+            var monsterStats = new List<MonsterStats>();
+
+            Func<Task> action = async () => { await _sut.CreateFile(path, monsterStats); };
+
+            await action.Should()
+                .ThrowExactlyAsync<InvalidOperationException>()
+                .WithMessage("There's no monster stats to write to a file");
+        }
+
+        [Theory, AutoData]
         public async Task GivenExistingDirectory_CreateFile_ShouldCallFileGenerator(List<MonsterStats> monsterStats, string path)
         {
             var strategy = new Mock<IFileGeneratorStrategy>();
